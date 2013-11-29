@@ -22,7 +22,7 @@ class MoviesController < ApplicationController
     if @movie.save
       redirect_to movies_path 
     else
-      render :new  # am i calling new from line 11?
+      render :new  # am i calling new from line 12?
     end
   end
 
@@ -36,16 +36,19 @@ class MoviesController < ApplicationController
     end
   end
 
-  def destroy 
+  def destory 
     @movie = Movie.find(params[:id])
-    @movie.destroy
-    redirect_to movies_path 
+    @movie.destory
+    redirect_to movies_path
   end
 
   protected
 
-  def movie_params 
-    params.require(:movie).permit(
+  # This method is for mass assignment protection. It's how it's done now in Rails4 (was different in Rails3). 
+  # It ensures that there is a :movie in the params, because it is "required"
+  # then it ensures that only certain attributes within the :movie hash are "permitted" in the params
+  def movie_params
+    params.require(:movie).permit(  # .permit?
       :title, :release_date, :director, :runtime_in_minutes, :poster_image_url, :description, 
     )
   end
