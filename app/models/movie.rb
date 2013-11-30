@@ -6,7 +6,7 @@ class Movie < ActiveRecord::Base
 	validates :director, 
 	presence: true 
 
-	validates :runtime_in_minutes,
+	validates :runtime_in_minutes, 
 	numericality: { only_integer: true }
 
 	validates :description, 
